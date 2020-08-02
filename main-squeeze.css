@@ -1,0 +1,30 @@
+div.main-squeeze-picker
+{
+    margin-top: 1em;
+    padding: 0 1em 1em;
+}
+
+span.main-squeeze-expansion
+{
+    display: none;
+}
+
+span.main-squeeze-expansion.main-squeeze-expansion-visible
+{
+    animation-duration: 0.5s;
+    animation-name: fadein;
+    display: inline;
+}
+
+@keyframes fadein
+{
+    from
+    {
+        opacity: 0.0;
+    }
+
+    to
+    {
+        opacity: 1.0;
+    }
+}
