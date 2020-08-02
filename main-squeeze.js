@@ -1,5 +1,8 @@
-function mainSqueezeExpansionDepth(blockEl, expansionEl)
-{
+var MAIN_SQUEEZE_LABELS = ['None', 'A little', 'Some', 'Some more',
+                           'Enough', 'More', 'Most of it', 'Lots',
+                           'Heaps', 'All'];
+
+function mainSqueezeExpansionDepth(blockEl, expansionEl) {
     var expansionDepth = 1;
 
     while (expansionEl.parentElement !== null
@@ -13,8 +16,7 @@ function mainSqueezeExpansionDepth(blockEl, expansionEl)
     return expansionDepth;
 }
 
-function mainSqueezeSetVisibleDepth(blockEl, depth)
-{
+function mainSqueezeSetVisibleDepth(blockEl, depth) {
     var expansionEls = blockEl.querySelectorAll('.main-squeeze-expansion');
     for (var i = 0; i < expansionEls.length; ++i) {
         var expansionEl = expansionEls[i];
@@ -24,6 +26,15 @@ function mainSqueezeSetVisibleDepth(blockEl, depth)
         } else {
             expansionEl.classList.remove('main-squeeze-expansion-visible');
         }
+    }
+}
+
+function mainSqueezeGetButtonLabel(i, count) {
+    var labelIndex;
+    if (i / count > 0.5) {
+        return MAIN_SQUEEZE_LABELS[MAIN_SQUEEZE_LABELS.length - 1 - (count - i)];
+    } else {
+        return MAIN_SQUEEZE_LABELS[i];
     }
 }
 
@@ -46,18 +57,19 @@ wp.domReady(function() {
         }
 
         /* Build the expansion layer picker UI. */
-        var pickerEl = document.createElement('div');
+        var pickerEl = document.createElement('p');
         pickerEl.classList.add('main-squeeze-picker');
+        pickerEl.appendChild(document.createTextNode('Context:'));
         for (var j = 0; j <= depth; ++j) {
             (function (blockEl, j) {
                 var buttonEl = document.createElement('button');
-                buttonEl.innerText = j;
+                buttonEl.innerText = mainSqueezeGetButtonLabel(j, depth);
                 buttonEl.addEventListener('click', function () {
                     mainSqueezeSetVisibleDepth(blockEl, j);
                 });
                 pickerEl.appendChild(buttonEl);
             })(blockEl, j);
         }
-        blockEl.appendChild(pickerEl);
+        blockEl.insertAdjacentElement('afterend', pickerEl);
     }
 });
