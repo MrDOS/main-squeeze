@@ -24,6 +24,16 @@ span.main-squeeze-expansion.main-squeeze-expansion-visible
     display: inline;
 }
 
+span.main-squeeze-expansion-1 { color: #c00000; }
+span.main-squeeze-expansion-2 { color: #00c000; }
+span.main-squeeze-expansion-3 { color: #0000c0; }
+span.main-squeeze-expansion-4 { color: #c0c000; }
+span.main-squeeze-expansion-5 { color: #00c0c0; }
+span.main-squeeze-expansion-6 { color: #c000c0; }
+/* TODO: main-squeeze.js has button labels for 10 expansions. Dubious that
+ * anyone would need that many; maybe it would be better to randomize the
+ * labels a bit. */
+
 @keyframes fadein
 {
     from

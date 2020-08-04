@@ -48,7 +48,10 @@ wp.domReady(function() {
         var depth = 0;
         var expansionEls = blockEl.querySelectorAll('.main-squeeze-expansion');
         for (var j = 0; j < expansionEls.length; ++j) {
-            depth = Math.max(depth, mainSqueezeExpansionDepth(blockEl, expansionEls[j]));
+            var expansionEl = expansionEls[j];
+            var expansionDepth = mainSqueezeExpansionDepth(blockEl, expansionEl);
+            expansionEl.classList.add('main-squeeze-expansion-' + expansionDepth);
+            depth = Math.max(depth, expansionDepth);
         }
 
         if (depth === 0) {
